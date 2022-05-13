@@ -13,6 +13,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 const usersRoutes = require('./src/routes/users.js');
+const usersPosts = require('./src/routes/posts.js');
 // ==========================
 
 
@@ -59,6 +60,7 @@ app.use('js', express.static(__dirname + 'public/js'));
 // Routes
 app.get('/', (req, res) => { res.status(200).send('Welcome the EJS Templating Engine!'); });
 app.use('/api', usersRoutes);
+app.use('/api', usersPosts);
 // ==========================
 
 
