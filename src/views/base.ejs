@@ -1,0 +1,25 @@
+<!-- HEADER -->
+<%- include('./partials/_header.ejs') %>
+
+
+    <div class="container mx-auto center-div w-25 border mt-lg-5 px-5 py-5">
+        <form class="form-horizontal" action="/api/login" method="post">
+            <div class="mb-3">
+                <label for="name" class="form-label" autocomplete="off">Name</label>
+                <input type="text" name="name" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label" autocomplete="off">Email address</label>
+                <input type="email" name="email" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" name="password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+
+    <!-- Footer -->
+    <%- include('./partials/_footer.ejs') %>

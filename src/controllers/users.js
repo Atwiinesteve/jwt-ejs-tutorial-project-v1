@@ -43,18 +43,34 @@ exports.loginUser = async function(req, res) {
 
     // Check user if exists.
     const user = await User.findOne({ email: req.body.email });
-    if (!user) return res.status(400).json({ message: 'User with Email Not Found.' });
+    if (!user) {
+        return res.status(400).json({ message: 'User with Email Not Found.' })
+    } else {
+        // User email vaild, validate password.
+        const validPassword = await bcrypt.compare(req.body.password, user.password);
+        if (!validPassword) {
+            // return res.status(401).json({ message: 'Unauthorised - Access Denied.' });
+            return res.render('404', {
+                title: 'Access Denied',
+                message: 'Access Denied. Make sure you have logged in to continue.',
+            });
+        } else {
+            // When successfully logged-in, assign a token.slice()
+            const token = jwt.sign({ _id: user._id }, process.env.TOKEN);
+            // res.status(200).header('auth-token', token).json({
+            //     "Auth-token": token,
+            //     message: 'Loggedin as ' + user.name
+            // });
+            return res.render('admin', {
+                title: 'Admin Page',
+                user: user.email
+            });
+        }
 
-    // User email vaild, validate password.
-    const validPassword = await bcrypt.compare(req.body.password, user.password);
-    if (!validPassword) return res.status(401).json({ message: 'Unauthorised - Access Denied.' });
 
-    //     When successfully logged-in, assign a token.slice()
-    const token = jwt.sign({ _id: user._id }, process.env.TOKEN);
-    res.status(200).header('auth-token', token).json({
-        "Auth-token": token,
-        message: 'Loggedin as ' + user.name
-    })
+    }
+
+
 }
 
 

@@ -31,6 +31,7 @@ const PORT = process.env.PORT || 4040;
 // ==========================
 // Middlewares.
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 // ==========================
 
 
@@ -58,7 +59,7 @@ app.use('js', express.static(__dirname + 'public/js'));
 
 // ==========================
 // Routes
-app.get('/', (req, res) => { res.status(200).send('Welcome the EJS Templating Engine!'); });
+app.get('/', (req, res) => { res.render('base', { title: ' | Login System' }) });
 app.use('/api', usersRoutes);
 app.use('/api', usersPosts);
 // ==========================
