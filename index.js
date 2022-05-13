@@ -11,6 +11,8 @@ require('./src/database/database.js');
 // Importing Modules
 const express = require('express');
 const bodyParser = require('body-parser');
+require('dotenv').config();
+const usersRoutes = require('./src/routes/users.js');
 // ==========================
 
 
@@ -56,6 +58,7 @@ app.use('js', express.static(__dirname + 'public/js'));
 // ==========================
 // Routes
 app.get('/', (req, res) => { res.status(200).send('Welcome the EJS Templating Engine!'); });
+app.use('/api', usersRoutes);
 // ==========================
 
 

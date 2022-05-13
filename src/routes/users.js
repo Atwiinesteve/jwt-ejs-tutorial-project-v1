@@ -29,7 +29,7 @@ const router = express.Router();
 router.post('/register', registerUser);
 
 // Creating and Registering Users.
-router.post('/register', loginUser);
+router.post('/login', loginUser);
 
 // ==========================
 
